@@ -1,0 +1,72 @@
+{%extends 'blog/base.html'%}
+{%load static%}
+
+
+{%block title%}
+Home | {{user.username}}
+{%endblock%}
+
+{%block content%}
+
+{%if messages%}
+<div class="row">
+    {%for message in messages%}
+    <div class="alert alert-{{message.tags}} offset-md-4">
+        {{message}}
+
+    </div>
+    {%endfor%}
+
+</div>
+{%endif%}
+
+{%if user.is_authenticated%}
+
+{%if user.first_name and user.last_name%}
+<div class="align-text-center text-center mt-2">
+    <h5>Welcome {{user.first_name}} {{user.last_name}}</h5>
+
+</div>
+
+{%else%}
+<div class="align-text-center text-center mt-2">
+        <h5>Welcome {{user.first_name}} {{user.last_name}}</h5>
+</div>
+{%endif%}
+{%endif%}
+
+<div class="container">
+    <div class="row text-center">
+        <div class="col-md-5 text-center">
+            <h4 id="status">Device is Offline</h4>
+
+        </div>
+
+    </div>
+
+</div>
+<div class="align-text-center text-center mt-2">
+<a href="{%url 'blog:action' 1%}"><button class="btn btn-primary" id="on">On</button></a>
+<a href="{%url 'blog:action' 0%}"><button class="btn btn-secondary" id="off">Off</button></a>
+</div>
+
+<div id="bodyHolder">
+        <div class="bulbHolder">
+          <img src="https://www.w3schools.com/js/pic_bulboff.gif" alt="light" id="myBulb" class="offset-4"/>
+        </div>
+</div>
+
+{%endblock%}
+
+{%block other_js%}
+
+<script type="text/javascript" src="{%static 'blog/ajax_funs.js'%}">
+
+
+
+</script>
+
+<!-- <script type="text/javascript">
+
+</script> -->
+{%endblock%}
